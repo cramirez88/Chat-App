@@ -1,13 +1,10 @@
 import React from 'react'
 import { io } from 'socket.io-client'
+import Chat from './components/Chat';
 
 function App() {
-
-  const socket = io('http://localhost:8000')
-  socket.on('receiving message', message => console.log(message))
-
   return (
-    <h1>Chat App</h1>
+    <Chat/>
   );
 }
 
