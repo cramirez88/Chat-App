@@ -1,7 +1,25 @@
 const express = require('express')
 const app = express()
 const port = 8000
+const cors = require('cors')
+const socket = require('socket.io')
+app.use(cors())
 
 
 
-app.listen(port, () => console.log(`The port is up and running on port: ${port}`))
+const server = app.listen(port, () => console.log(`The port is up and running on port: ${port}`))
+
+
+const io = socket(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['*'],
+    credentials: true
+  }
+})
+io.on('connection', socket => {
+  console.log(`Socket id is: ${socket.id}`)
+})
+
+
